@@ -1,0 +1,16 @@
+@import "../../../../styles.scss";
+
+.overflow-y {
+  overflow-y: auto;
+  scrollbar-gutter: auto;
+}
+
+.dropdown {
+  width: fit-content;
+}
+
+@include media-breakpoint-up(md) {
+  .table-container {
+    width: 560px;
+  }
+}

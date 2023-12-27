@@ -1,0 +1,92 @@
+<div class="h-100">
+  <div class="px-0 d-flex flex-column h-100">
+    <!-- header -->
+    <div class="d-flex flex-column flex-nowrap">
+      <h1 class="p-3 align-self-center">To-do list</h1>
+      <div class="d-flex flex-row align-items-center gap-2">
+        <div class="dropdown" data-bs-toggle="dropdown">
+          <button
+            class="btn dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span> To-do's per page :</span>
+            <span>{{ numOfTodosPerPage }}</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li *ngFor="let option of todosPerPageOptionsList">
+              <a
+                class="dropdown-item"
+                [ngClass]="{
+                disabled: option === numOfTodosPerPage, 
+                active: option === numOfTodosPerPage, 
+              }"
+                href="#"
+                (click)="onNumOfTodosPerPageChanged(option)"
+                >{{ option }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="showCompleted"
+          [(ngModel)]="showCompleted"
+          (change)="onTodoShowCompleted()"
+        />
+        <label class="form-check-label" for="showCompleted"
+          >Show completed To-do's</label
+        >
+      </div>
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#createTodoDialog"
+        data-toggle="modal"
+        data-target="#createTodoDialog"
+      >
+        Create To-do
+      </button>
+      <app-create-todo-dialog
+        [userId]="userId"
+        (todoCreated)="onTodoCreated($event)"
+      ></app-create-todo-dialog>
+    </div>
+
+    <!-- body -->
+    <div class="h-75 d-flex flex-row">
+      <!-- table and paggination -->
+      <div class="h-100 column table-container">
+        <table class="d-flex flex-column col-sm h-100">
+          <div class="overflow-y px-3">
+            <app-todo-table-row
+              class="py-3 row"
+              *ngFor="let todo of pageTodos"
+              [todo]="todo"
+              [isEditable]="!isLoading"
+              (onTodoChanged)="onTodoChanged($event)"
+            >
+            </app-todo-table-row>
+          </div>
+        </table>
+        <app-pagginator
+          [currentPage]="currentPage"
+          [itemsPerPage]="numOfTodosPerPage"
+          [totalItems]="filteredTodoList.length"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </app-pagginator>
+      </div>
+      <app-pie-chart
+        class="d-flex flex-column col-sm-7 d-none d-md-block"
+        [completedTodos]="numOfCompletedTodos"
+        [notCompletedTodos]="numOfNotCompletedTodos"
+      >
+      </app-pie-chart>
+    </div>
+  </div>
+</div>

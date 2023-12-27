@@ -1,0 +1,50 @@
+<div class="vh-100">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="d-flex flex-column col-sm text-black">
+        <ul class="nav nav-tabs justify-content-center mt-5">
+          <li class="nav-item">
+            <button
+              class="nav-link"
+              [ngClass]="{
+                active: selectedLoginMethod === loginMethodType.SignIn
+              }"
+              (click)="onLoginMethodChanged(loginMethodType.SignIn)"
+            >
+              Sign in
+            </button>
+          </li>
+          <li class="nav-item">
+            <button
+              class="nav-link"
+              [ngClass]="{
+                active: selectedLoginMethod === loginMethodType.SignUp
+              }"
+              (click)="onLoginMethodChanged(loginMethodType.SignUp)"
+            >
+              Sign up
+            </button>
+          </li>
+        </ul>
+
+        <app-login
+          class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 pt-5 mt-5"
+          *ngIf="selectedLoginMethod === loginMethodType.SignIn"
+        >
+        </app-login>
+        <app-signup
+          class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 pt-5 mt-5"
+          *ngIf="selectedLoginMethod === loginMethodType.SignUp"
+        >
+        </app-signup>
+      </div>
+      <div class="position-relative col-sm px-0 d-none d-sm-block">
+        <img
+          src="../../../../assets/images/todos-background.jpeg"
+          alt="Login image"
+          class="w-100 vh-100 background-image"
+        />
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<tr class="py-3 row">
+  <span
+    [ngClass]="{
+      'scibble-line': todo.completed
+    }"
+    class="col"
+    >{{ todo.title }}</span
+  >
+  <div class="col-3">
+    <span *ngIf="todo.completionDate">{{
+      todo.completionDate | date : "MMM dd, yyyy 'at' hh:mm a"
+    }}</span>
+  </div>
+  <div class="col-3 form-check">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      name="completed"
+      [disabled]="!isEditable"
+      [(ngModel)]="todo.completed"
+      (change)="onTodoStatusChanged()"
+    />
+    <label class="form-check-label" for="completed">{{
+      todo.completed ? "Completed" : "Not Completed"
+    }}</label>
+  </div>
+</tr>

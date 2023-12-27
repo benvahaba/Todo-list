@@ -1,0 +1,8 @@
+<div class="vh-100">
+  <app-login-page class="h-100" *ngIf="!user"></app-login-page>
+  <app-todos-view
+    class="h-100"
+    *ngIf="user"
+    [userId]="user.id"
+  ></app-todos-view>
+</div>

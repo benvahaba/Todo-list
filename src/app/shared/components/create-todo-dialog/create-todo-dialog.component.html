@@ -1,0 +1,74 @@
+<div
+  class="modal fade"
+  id="createTodoDialog"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="createTodoDialogTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="createTodoDialogTitle">Create To-do</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-dismiss="modal"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form
+          #createTodoForm="ngForm"
+          class="form"
+          (ngSubmit)="onSubmit(createTodoForm)"
+        >
+          <!-- body -->
+          <div class="form-outline">
+            <label class="form-label" for="title">Tilte</label>
+            <input
+              class="form-control form-control-lg"
+              [(ngModel)]="todo.title"
+              id="title"
+              name="title"
+              #title="ngModel"
+              type="text"
+              minlength="4"
+              required
+            />
+
+            <div
+              *ngIf="title.invalid && (title.dirty || title.touched)"
+              class="alert alert-danger"
+            >
+              <div *ngIf="title.errors?.['required']">Name is required.</div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              [disabled]="!createTodoForm.valid"
+            >
+              Create
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
